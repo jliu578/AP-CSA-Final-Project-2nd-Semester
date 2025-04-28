@@ -14,6 +14,19 @@ public class PathFinding {
     static ArrayList<String> answerList = new ArrayList<>();
     static boolean[][] visited = new boolean[A.length][A[0].length];
 
+    private static void dfs(int row, int col) {
+        if (row < 0 || row >= A.length || col < 0 || col >= A[0].length) return;
+        if (A[row][col] != 1 || visited [row][col]) return;
+
+        visited[row][col] = true;
+        answerList.add("A[" + row + "][" + col + "]");
+
+        dfs(row - 1, col);
+        dfs(row + 1, col);
+        dfs(row, col - 1);
+        dfs(row, col + 1);
+    }
+
     public static void main(String[] args) {
         visited = new boolean[A.length][A[0].length];
 
@@ -26,18 +39,5 @@ public class PathFinding {
                 }
             }
         }
-    }
-
-    private static void dfs(int row, int col) {
-        if (row < 0 || row >= A.length || col < 0 || col >= A[0].length) return;
-        if (A[row][col] != 1 || visited [row][col]) return;
-
-        visited[row][col] = true;
-        answerList.add("A[" + row + "][" + col + "]");
-
-        dfs(row - 1, col);
-        dfs(row + 1, col);
-        dfs(row, col - 1);
-        dfs(row, col + 1);
     }
 }
